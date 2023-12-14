@@ -1,0 +1,13 @@
+To build wasm:
+1. cargo build --release --target wasm32-unknown-unknown
+2. wasm-bindgen --no-typescript --target web --out-dir ./out/ --out-name "jordquest" .\target\wasm32-unknown-unknown\release\jordquest.wasm
+
+To test wasm:
+1. Get live server extension
+2. Right click html file in /out and run in live server
+3. When finished testing, end the live server.
+
+To upload to itch.io
+1. Build wasm
+2. Compress to zip file
+3. Upload zip

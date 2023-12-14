@@ -30,11 +30,13 @@ pub fn startup(mut commands: Commands) {
 pub fn connect(addresses: Res<menus::NetworkAddresses>,
     mut sock: ResMut<net::Socket>
 ) {
-    let host_ip = Ipv4Addr::new(0,0,0,0);
+    let host_ip = Ipv4Addr::new(192, 168, 0, 1);
     let host_port = u16::from_str(&addresses.host_port).expect("bad host port");
     let host_addr = SocketAddr::new(IpAddr::from(host_ip), host_port);
-    sock.0 = Some(UdpSocket::bind(host_addr).expect("host port in use"));
-    sock.0.as_mut().unwrap().set_nonblocking(true).expect("can't set nonblocking");
+    // had to be commented out unfortunately to publish to the web otherwise you get an error
+    // Error { kind: Unsupported, message: "operation not supported on this platform" }
+    // sock.0 = Some(UdpSocket::bind(host_addr).expect("host port in use")); 
+    // sock.0.as_mut().unwrap().set_nonblocking(true).expect("can't set nonblocking");
 }
 
 pub fn disconnect(
